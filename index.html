@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MarketHub | Rentals, Sofas & More</title>
+
+<meta name="description"
+content="Discover rentals, sofas, furniture and other products in one convenient online marketplace.">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f6f7f9;
+  color:#17202a;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+header{
+  background:#111827;
+  color:white;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 3px 15px rgba(0,0,0,.2);
+}
+
+.nav{
+  max-width:1150px;
+  margin:auto;
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:23px;
+  font-weight:800;
+}
+
+.logo span{
+  color:#f59e0b;
+}
+
+.nav-links{
+  display:flex;
+  gap:25px;
+}
+
+.nav-links a{
+  color:#ddd;
+  font-size:14px;
+}
+
+.nav-links a:hover{
+  color:#f59e0b;
+}
+
+.menu-btn{
+  display:none;
+  font-size:25px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  background:
+    linear-gradient(rgba(17,24,39,.82),rgba(17,24,39,.88)),
+    url("https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1600&q=80");
+  background-size:cover;
+  background-position:center;
+  color:white;
+  padding:90px 20px;
+  text-align:center;
+}
+
+.hero-content{
+  max-width:850px;
+  margin:auto;
+}
+
+.hero h1{
+  font-size:48px;
+  line-height:1.1;
+  margin-bottom:18px;
+}
+
+.hero h1 span{
+  color:#f59e0b;
+}
+
+.hero p{
+  font-size:18px;
+  color:#ddd;
+  max-width:650px;
+  margin:0 auto 30px;
+  line-height:1.7;
+}
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:14px 23px;
+  border-radius:8px;
+  font-weight:bold;
+  display:inline-block;
+}
+
+.btn-primary{
+  background:#f59e0b;
+  color:#111827;
+}
+
+.btn-secondary{
+  border:1px solid #fff;
+  color:white;
+}
+
+/* CATEGORIES */
+.section{
+  max-width:1150px;
+  margin:auto;
+  padding:65px 20px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.section-title h2{
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.section-title p{
+  color:#667085;
+}
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.category{
+  background:white;
+  padding:25px 15px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow:0 5px 20px rgba(0,0,0,.07);
+  transition:.3s;
+}
+
+.category:hover{
+  transform:translateY(-5px);
+}
+
+.category-icon{
+  font-size:35px;
+  margin-bottom:12px;
+}
+
+.category h3{
+  margin-bottom:7px;
+}
+
+.category p{
+  font-size:13px;
+  color:#777;
+}
+
+/* SEARCH */
+.search-area{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:35px;
+}
+
+.search{
+  display:flex;
+  gap:10px;
+}
+
+.search input{
+  flex:1;
+  padding:15px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:15px;
+  outline:none;
+}
+
+.search button{
+  border:none;
+  background:#111827;
+  color:white;
+  padding:0 22px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* LISTINGS */
+.listings{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 5px 20px rgba(0,0,0,.07);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+.card-image{
+  height:220px;
+  position:relative;
+  overflow:hidden;
+}
+
+.card-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.badge{
+  position:absolute;
+  top:12px;
+  left:12px;
+  background:#f59e0b;
+  color:#111827;
+  padding:7px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.card-body{
+  padding:18px;
+}
+
+.card-body h3{
+  font-size:19px;
+  margin-bottom:8px;
+}
+
+.price{
+  color:#e08a00;
+  font-weight:bold;
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.location{
+  color:#777;
+  font-size:13px;
+  margin-bottom:13px;
+}
+
+.description{
+  color:#666;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:15px;
+}
+
+.whatsapp{
+  display:block;
+  background:#16a34a;
+  color:white;
+  text-align:center;
+  padding:12px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+/* CTA */
+.cta{
+  background:#111827;
+  color:white;
+  margin-top:20px;
+}
+
+.cta-inner{
+  max-width:900px;
+  margin:auto;
+  text-align:center;
+  padding:70px 20px;
+}
+
+.cta h2{
+  font-size:35px;
+  margin-bottom:15px;
+}
+
+.cta p{
+  color:#ddd;
+  margin-bottom:25px;
+  line-height:1.6;
+}
+
+/* ABOUT */
+.about{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:45px;
+  align-items:center;
+}
+
+.about-image img{
+  width:100%;
+  height:420px;
+  object-fit:cover;
+  border-radius:18px;
+}
+
+.about-text h2{
+  font-size:34px;
+  margin-bottom:18px;
+}
+
+.about-text p{
+  color:#666;
+  line-height:1.8;
+  margin-bottom:15px;
+}
+
+.features{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:20px;
+}
+
+.feature{
+  background:#fff;
+  padding:14px;
+  border-radius:9px;
+  box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+/* FOOTER */
+footer{
+  background:#0b1120;
+  color:#bbb;
+  text-align:center;
+  padding:35px 20px;
+}
+
+footer strong{
+  color:white;
+}
+
+footer p{
+  margin-top:8px;
+  font-size:13px;
+}
+
+.float-whatsapp{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  width:57px;
+  height:57px;
+  background:#16a34a;
+  color:white;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:27px;
+  box-shadow:0 5px 20px rgba(0,0,0,.25);
+  z-index:999;
+}
+
+/* MOBILE */
+@media(max-width:850px){
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .listings{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .about{
+    grid-template-columns:1fr;
+  }
+
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:65px;
+    left:0;
+    right:0;
+    background:#111827;
+    flex-direction:column;
+    padding:20px;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+}
+
+@media(max-width:600px){
+
+  .hero{
+    padding:70px 18px;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .categories{
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+
+  .listings{
+    grid-template-columns:1fr;
+  }
+
+  .search{
+    flex-direction:column;
+  }
+
+  .search button{
+    padding:14px;
+  }
+
+  .about-image img{
+    height:300px;
+  }
+
+  .features{
+    grid-template-columns:1fr;
+  }
+
+  .cta h2{
+    font-size:28px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <div class="logo">
+      Market<span>Hub</span>
+    </div>
+
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#listings">Listings</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+  <div class="hero-content">
+
+    <h1>
+      Find What You Need.
+      <span>In One Place.</span>
+    </h1>
+
+    <p>
+      Discover rentals, sofas, furniture and other available products.
+      Browse listings, check details and contact the seller directly.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#listings" class="btn btn-primary">
+        Browse Listings
+      </a>
+
+      <a href="#contact" class="btn btn-secondary">
+        Contact Us
+      </a>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+
+  <div class="section-title">
+
+    <h2>Explore Categories</h2>
+
+    <p>
+      Browse different products and services available.
+    </p>
+
+  </div>
+
+  <div class="categories">
+
+    <div class="category">
+      <div class="category-icon">🏠</div>
+      <h3>Rentals</h3>
+      <p>Houses, rooms and rental properties</p>
+    </div>
+
+    <div class="category">
+      <div class="category-icon">🛋️</div>
+      <h3>Sofas</h3>
+      <p>Modern sofas and furniture</p>
+    </div>
+
+    <div class="category">
+      <div class="category-icon">🪑</div>
+      <h3>Furniture</h3>
+      <p>Different furniture options</p>
+    </div>
+
+    <div class="category">
+      <div class="category-icon">🛍️</div>
+      <h3>Other Products</h3>
+      <p>Discover more available items</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- LISTINGS -->
+<section class="section" id="listings">
+
+  <div class="section-title">
+
+    <h2>Latest Listings</h2>
+
+    <p>
+      Explore some of the latest available listings.
+    </p>
+
+  </div>
+
+  <div class="search-area">
+
+    <div class="search">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search rentals, sofas, furniture..."
+        onkeyup="searchListings()"
+      >
+
+      <button onclick="searchListings()">
+        Search
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="listings" id="listingContainer">
+
+    <!-- RENTAL -->
+
+    <div class="card listing">
+
+      <div class="card-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1560185008-b033106af5c3?auto=format&fit=crop&w=900&q=80"
+          alt="Modern house">
+
+        <div class="badge">
+          RENTAL
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <h3>Modern 2 Bedroom House</h3>
+
+        <div class="price">
+          UGX 800,000 / Month
+        </div>
+
+        <div class="location">
+          📍 Kampala
+        </div>
+
+        <div class="description">
+          Spacious and modern home in a convenient location.
+        </div>
+
+        <a
+          class="whatsapp"
+          href="https://wa.me/256000000000?text=Hello,%20I%20am%20interested%20in%20the%202%20Bedroom%20House."
+          target="_blank">
+          💬 Enquire on WhatsApp
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- SOFA -->
+
+    <div class="card listing">
+
+      <div class="card-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80"
+          alt="Modern sofa">
+
+        <div class="badge">
+          SOFAS
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <h3>Modern Luxury Sofa</h3>
+
+        <div class="price">
+          UGX 1,200,000
+        </div>
+
+        <div class="location">
+          📍 Kampala
+        </div>
+
+        <div class="description">
+          Stylish and comfortable sofa suitable for modern homes.
+        </div>
+
+        <a
+          class="whatsapp"
+          href="https://wa.me/256000000000?text=Hello,%20I%20am%20interested%20in%20the%20Modern%20Luxury%20Sofa."
+          target="_blank">
+          💬 Enquire on WhatsApp
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- FURNITURE -->
+
+    <div class="card listing">
+
+      <div class="card-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=900&q=80"
+          alt="Furniture">
+
+        <div class="badge">
+          FURNITURE
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <h3>Premium Dining Set</h3>
+
+        <div class="price">
+          UGX 950,000
+        </div>
+
+        <div class="location">
+          📍 Kampala
+        </div>
+
+        <div class="description">
+          Quality dining set suitable for homes and offices.
+        </div>
+
+        <a
+          class="whatsapp"
+          href="https://wa.me/256000000000?text=Hello,%20I%20am%20interested%20in%20the%20Premium%20Dining%20Set."
+          target="_blank">
+          💬 Enquire on WhatsApp
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section class="section" id="about">
+
+  <div class="about">
+
+    <div class="about-image">
+
+      <img
+        src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=80"
+        alt="Online marketplace">
+
+    </div>
+
+    <div class="about-text">
+
+      <h2>
+        Everything In One Place
+      </h2>
+
+      <p>
+        Instead of customers searching through many WhatsApp posts,
+        social media posts and messages, this platform gives them one
+        convenient place to discover available products and services.
+      </p>
+
+      <p>
+        New listings can be added whenever new stock or opportunities
+        become available.
+      </p>
+
+      <div class="features">
+
+        <div class="feature">
+          📸 <strong>Photo Listings</strong>
+        </div>
+
+        <div class="feature">
+          💰 <strong>Clear Prices</strong>
+        </div>
+
+        <div class="feature">
+          📍 <strong>Locations</strong>
+        </div>
+
+        <div class="feature">
+          💬 <strong>WhatsApp Enquiries</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CTA -->
+<section class="cta" id="contact">
+
+  <div class="cta-inner">
+
+    <h2>
+      Have Something To Sell or Rent?
+    </h2>
+
+    <p>
+      Contact us to advertise your latest products, properties,
+      furniture and other available items.
+    </p>
+
+    <a
+      href="https://wa.me/256000000000?text=Hello,%20I%20would%20like%20to%20advertise%20an%20item."
+      target="_blank"
+      class="btn btn-primary">
+      💬 Contact on WhatsApp
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <strong>MarketHub</strong>
+
+  <p>
+    Rentals • Sofas • Furniture • Products
+  </p>
+
+  <p>
+    © 2026 MarketHub. All rights reserved.
+  </p>
+
+  <p style="margin-top:15px;">
+    Website concept by <strong>BridanX Tech LLC</strong>
+  </p>
+
+</footer>
+
+
+<!-- FLOATING WHATSAPP -->
+
+<a
+  href="https://wa.me/256000000000"
+  target="_blank"
+  class="float-whatsapp"
+  aria-label="WhatsApp">
+  💬
+</a>
+
+
+<script>
+
+function toggleMenu(){
+
+  document
+    .getElementById("navLinks")
+    .classList
+    .toggle("active");
+
+}
+
+
+function searchListings(){
+
+  const input =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+  const listings =
+    document.querySelectorAll(".listing");
+
+  listings.forEach(function(card){
+
+    const text =
+      card.innerText.toLowerCase();
+
+    if(text.includes(input)){
+
+      card.style.display = "";
+
+    }else{
+
+      card.style.display = "none";
+
+    }
+
+  });
+
+}
+
+</script>
+
+</body>
+</html>
